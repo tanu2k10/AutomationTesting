@@ -1,0 +1,218 @@
+{
+	"version": 1,
+	"collections": [
+		{
+			"id": "765f5760-75c7-478f-b8e1-0570f7f099d4",
+			"uid": "0-765f5760-75c7-478f-b8e1-0570f7f099d4",
+			"name": "API Tests Assignment",
+			"description": null,
+			"auth": null,
+			"events": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "22ceab6c-a3ec-471d-8842-00bbf7c1f36f",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "7d3c508b-9ed7-4ff5-915f-1c655e452f82",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Content-Type is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"pm.test(\"Content-Type is application/json\", function () {",
+							"    pm.expect(pm.response.headers.get('Content-Type')).eql('application/json');",
+							"});",
+							"pm.test(\"Response time is less than 1000ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+							"});"
+						]
+					}
+				}
+			],
+			"variables": [],
+			"order": [
+				"f3cf6eb2-2e77-4fe8-bb48-c191f49d41ff",
+				"ac05ecd3-c83f-441e-8d32-b1ad567e02ce"
+			],
+			"folders_order": [],
+			"protocolProfileBehavior": {},
+			"createdAt": "2022-10-28T13:13:58.065Z",
+			"folders": [],
+			"requests": [
+				{
+					"id": "ac05ecd3-c83f-441e-8d32-b1ad567e02ce",
+					"uid": "0-ac05ecd3-c83f-441e-8d32-b1ad567e02ce",
+					"name": "CountryandPostalCode",
+					"url": "http://api.zippopotam.us/{{Country}}/{{PostalCode}}",
+					"description": null,
+					"data": [],
+					"dataOptions": {
+						"raw": {
+							"language": "json"
+						}
+					},
+					"dataMode": "raw",
+					"headerData": null,
+					"method": "GET",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "57aadfee-c099-4790-a37e-4b6802f2881d",
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"let country = pm.variables.get(\"Country\");\r",
+									"let postCode = pm.variables.get(\"PostalCode\");\r",
+									"let placeName = pm.variables.get(\"PlaceName\");\r",
+									"\r",
+									"let placeFound = false;\r",
+									"\r",
+									"for(let i = 0; i < jsonData.places.length; i++){\r",
+									"    let place = jsonData.places[i];\r",
+									"    if(place[\"place name\"] === placeName ){\r",
+									"        placeFound = true;\r",
+									"        break;\r",
+									"    }\r",
+									"}\r",
+									"\r",
+									"pm.test(`Verify-For Country- ${country} and Postal code -${postCode}, Place name is -${placeName} `, function() {\r",
+									"     pm.expect(placeFound).to.be.true;\r",
+									"});\r",
+									"\r",
+									"\r",
+									"/*pm.test(`Verify-For Country- ${country} and Postal code -${postCode}, Place name is -${placeName} `, function() {\r",
+									"     pm.expect(jsonData.places[0][\"place name\"]).to.eql(placeName);\r",
+									"});*/\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"folder": null,
+					"responses_order": [],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"preRequestScript": null,
+					"tests": "var jsonData = pm.response.json();\r\n\r\npm.test(\"Status code is 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\nlet country = pm.variables.get(\"Country\");\r\nlet postCode = pm.variables.get(\"PostalCode\");\r\nlet placeName = pm.variables.get(\"PlaceName\");\r\n\r\nlet placeFound = false;\r\n\r\nfor(let i = 0; i < jsonData.places.length; i++){\r\n    let place = jsonData.places[i];\r\n    if(place[\"place name\"] === placeName ){\r\n        placeFound = true;\r\n        break;\r\n    }\r\n}\r\n\r\npm.test(`Verify-For Country- ${country} and Postal code -${postCode}, Place name is -${placeName} `, function() {\r\n     pm.expect(placeFound).to.be.true;\r\n});\r\n\r\n\r\n/*pm.test(`Verify-For Country- ${country} and Postal code -${postCode}, Place name is -${placeName} `, function() {\r\n     pm.expect(jsonData.places[0][\"place name\"]).to.eql(placeName);\r\n});*/\r\n\r\n\r\n",
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "765f5760-75c7-478f-b8e1-0570f7f099d4",
+					"rawModeData": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "f3cf6eb2-2e77-4fe8-bb48-c191f49d41ff",
+					"uid": "0-f3cf6eb2-2e77-4fe8-bb48-c191f49d41ff",
+					"name": "Location",
+					"url": "http://api.zippopotam.us/de/bw/stuttgart",
+					"description": null,
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": null,
+					"method": "GET",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f081e393-90a4-422c-b4d7-996fe1648afb",
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function(){\r",
+									"pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Country is Germany\", function () {\r",
+									"    pm.expect(jsonData.country).to.eql(\"Germany\");\r",
+									"});\r",
+									"pm.test(\"State is Baden-Württemberg\", function () {\r",
+									"    pm.expect(jsonData.state).to.eql(\"Baden-Württemberg\");\r",
+									"});\r",
+									"\r",
+									"let pName= [];\r",
+									"\r",
+									"for (let i = 0; i < jsonData.places.length; i++) {\r",
+									"    let place = jsonData.places[i];\r",
+									"    if (place[\"post code\"] === \"70597\"){\r",
+									"        pName.push(place[\"place name\"])\r",
+									"    }\r",
+									"}\r",
+									"console.log(pName);\r",
+									"\r",
+									"pm.test('Verify- For Post Code \"70597\" the place name has (Stuttgart Degerloch)', function () {\r",
+									"    pm.expect(pName).to.include(\"Stuttgart Degerloch\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"folder": null,
+					"responses_order": [],
+					"preRequestScript": null,
+					"tests": "var jsonData = pm.response.json();\r\n\r\npm.test(\"Status code is 200\", function(){\r\npm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Country is Germany\", function () {\r\n    pm.expect(jsonData.country).to.eql(\"Germany\");\r\n});\r\npm.test(\"State is Baden-Württemberg\", function () {\r\n    pm.expect(jsonData.state).to.eql(\"Baden-Württemberg\");\r\n});\r\n\r\nlet pName= [];\r\n\r\nfor (let i = 0; i < jsonData.places.length; i++) {\r\n    let place = jsonData.places[i];\r\n    if (place[\"post code\"] === \"70597\"){\r\n        pName.push(place[\"place name\"])\r\n    }\r\n}\r\nconsole.log(pName);\r\n\r\npm.test('Verify- For Post Code \"70597\" the place name has (Stuttgart Degerloch)', function () {\r\n    pm.expect(pName).to.include(\"Stuttgart Degerloch\");\r\n});\r\n\r\n\r\n\r\n",
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "765f5760-75c7-478f-b8e1-0570f7f099d4",
+					"pathVariables": {}
+				}
+			]
+		}
+	],
+	"environments": [
+		{
+			"id": "b49f7f4a-c460-4da9-93d4-3b70e620e020",
+			"name": "My Workspace - globals",
+			"values": [
+				{
+					"key": "Country",
+					"value": "us",
+					"type": "default",
+					"enabled": true
+				},
+				{
+					"key": "PostalCode",
+					"value": "90210",
+					"type": "default",
+					"enabled": true
+				},
+				{
+					"key": "PlaceName",
+					"value": "Beverly Hills",
+					"type": "default",
+					"enabled": true
+				}
+			]
+		}
+	],
+	"headerPresets": [],
+	"globals": []
+}
