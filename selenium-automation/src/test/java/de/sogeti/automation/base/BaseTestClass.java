@@ -27,8 +27,8 @@ public class BaseTestClass {
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
-		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(25));
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(8));
 		driver.get("https://www.sogeti.com/");
 		
 
@@ -36,7 +36,7 @@ public class BaseTestClass {
 	
 	@AfterEach
     public void quit() throws InterruptedException {
-		Thread.sleep(4000);
+		//Thread.sleep(4000);
         driver.quit();
     }
 	

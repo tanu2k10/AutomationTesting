@@ -11,12 +11,9 @@ import org.openqa.selenium.support.PageFactory;
 public class NavbarHeader {
 
 	WebDriver driver;
-
-	@FindBy(xpath = "//*[@id=\"main-menu\"]/ul/li[3]/div[1]/span")
-	WebElement serviceLink;
-
-	@FindBy(linkText = "Automation")
-	WebElement automationLink;
+	
+	@FindBy(css = ".navbar-global > span")
+	WebElement worldwide;
 
 	@FindBy(css = "#main-menu > ul > li.has-children")
 	List<WebElement> mainMenuList;
@@ -52,6 +49,11 @@ public class NavbarHeader {
 		WebElement selectedWebElement = driver.findElement(By.className("selected"));
 		selectedWebElement.click();
 		return selectedWebElement.findElement(By.className("selected")).findElement(By.tagName("a")).getText();
+	}
+	
+	public void gotoInternationalPage(String pageName) {
+		worldwide.click();
+		driver.findElement(By.linkText(pageName)).click();
 	}
 
 	
