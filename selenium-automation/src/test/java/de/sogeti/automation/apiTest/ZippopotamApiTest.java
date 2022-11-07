@@ -50,10 +50,7 @@ public class ZippopotamApiTest {
 	
 
 	@Test
-	void test_zipcodes_response_success_given_country_state_city() {
-		
-		//RestAssured.responseSpecification.accept(JSON).
-		
+	void test_zipcodes_response_success_given_country_state_city() {	
 
 		LocationPostcodes places = given()
 			.spec(requestSpec)

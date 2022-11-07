@@ -36,8 +36,9 @@ public class AutomationPage {
 	@FindBy(id = "863a18ee-d748-4591-bb64-ef6eae65910e")
 	private WebElement iAgreeCheckbox;
 
-	@FindBy(css = ".recaptcha-checkbox-border")
+	/*@FindBy(css = ".recaptcha-checkbox-border")
 	private WebElement captcha;
+	*/
 
 	public AutomationPage(WebDriver driver) {
 		this.driver = driver;
@@ -66,7 +67,7 @@ public class AutomationPage {
 		Message.sendKeys(faker.lorem().sentence(50));
 		// Select the agree checkbox
 		iAgreeCheckbox.click();
-		captcha.click();
+		//captcha.click();
 
 	}
 }
