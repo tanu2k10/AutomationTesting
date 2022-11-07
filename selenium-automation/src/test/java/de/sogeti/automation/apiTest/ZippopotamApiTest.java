@@ -16,6 +16,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import de.sogeti.automation.model.api.LocationPostcodes;
+import de.sogeti.automation.util.PropertiesUtil;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
@@ -31,7 +32,7 @@ public class ZippopotamApiTest {
 	
 	@BeforeAll
     static void initAll() {
-		RestAssured.baseURI = "http://api.zippopotam.us";
+		RestAssured.baseURI = PropertiesUtil.properties.getProperty("apiUrl");
 		
 		RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder();
 		requestSpecBuilder.setContentType(JSON);
