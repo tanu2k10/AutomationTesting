@@ -46,6 +46,5 @@ Steps to run the project
 
 
 
-
-
-
+Note: Added REST-Assured Testing and validating test in this project.
+Run all test using cmd:*mvn clean test*
