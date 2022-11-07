@@ -13,5 +13,5 @@ Separate read me documents have been created for the individual projects and it 
 3. Steps to run the projects
 
 Folders:
-	\POSTMAN : Postman api project json
-	\selenium-automation : Selenium Automation testing + Rest-assured api automain testing
+1.	\POSTMAN : Postman api project json
+2.	\selenium-automation : Selenium Automation testing + Rest-assured api automain testing
